@@ -1,0 +1,55 @@
+# Used following resource:
+https://docs.01.org/clearlinux/latest/guides/kernel/kernel-modules-dkms.html
+
+# following commands are working:
+
+
+=================
+command:
+dkms add -m hello_dkms -v 1.0
+-----------------
+output:
+Creating symlink /var/lib/dkms/hello_dkms/1.0/source ->
+                 /usr/src/hello_dkms-1.0
+
+DKMS: add completed.
+
+=================
+dkms build  -m hello_dkms -v 1.0
+-----------------
+
+Kernel preparation unnecessary for this kernel.  Skipping...
+
+Building module:
+cleaning build area...
+make -j4 KERNELRELEASE=5.4.0-42-generic -C src/ KERNELDIR=/lib/modules/5.4.0-42-generic/build...
+Signing module:
+Generating a new Secure Boot signing key:
+Can't load /var/lib/shim-signed/mok/.rnd into RNG
+140598865265088:error:2406F079:random number generator:RAND_load_file:Cannot open file:../crypto/rand/randfile.c:88:Filename=/var/lib/shim-signed/mok/.rnd
+Generating a RSA private key
+...............+++++
+............................+++++
+writing new private key to '/var/lib/shim-signed/mok/MOK.priv'
+-----
+ - /var/lib/dkms/hello_dkms/1.0/5.4.0-42-generic/x86_64/module/hello.ko
+Secure Boot not enabled on this system.
+cleaning build area...
+
+DKMS: build completed.
+=================
+dkms install  -m hello_dkms -v 1.0
+-----------------
+hello:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/5.4.0-42-generic/updates/dkms/
+
+depmod...
+
+DKMS: install completed.
+root@guyen-Virtual-Machine:/git.co/dev-learn/device-drivers#
+
+
